@@ -60,10 +60,93 @@ export default function SmoothScroll({ children }: { children: React.ReactNode }
             });
         });
 
+        // 4. Direction-aware entrance animations for sections
+        const prefersReducedMotion = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+
+        // Track last scroll direction using wheel and touch events
+        let lastDirection: 'down' | 'up' = 'down';
+        let touchStartY = 0;
+
+        const wheelHandler = (e: WheelEvent) => {
+            if (e.deltaY > 0) lastDirection = 'down';
+            else if (e.deltaY < 0) lastDirection = 'up';
+        };
+
+        const touchStart = (e: TouchEvent) => {
+            touchStartY = e.touches[0]?.clientY || 0;
+        };
+
+        const touchMove = (e: TouchEvent) => {
+            const y = e.touches[0]?.clientY || 0;
+            if (y < touchStartY) lastDirection = 'down';
+            else if (y > touchStartY) lastDirection = 'up';
+            touchStartY = y;
+        };
+
+        window.addEventListener('wheel', wheelHandler, { passive: true });
+        window.addEventListener('touchstart', touchStart, { passive: true });
+        window.addEventListener('touchmove', touchMove, { passive: true });
+
+        const observed = new Set<Element>();
+
+        const io = new IntersectionObserver((entries) => {
+            entries.forEach((entry) => {
+                const el = entry.target as HTMLElement;
+                
+                // If reduced motion, just show
+                if (prefersReducedMotion) {
+                    if (entry.isIntersecting) {
+                        gsap.to(el, { opacity: 1, duration: 0 });
+                    }
+                    return;
+                }
+
+                if (entry.isIntersecting) {
+                    // Animate in based on scroll direction
+                    const from = lastDirection === 'down' 
+                        ? { y: 60, opacity: 0 } 
+                        : { y: -60, opacity: 0 };
+                    
+                    gsap.fromTo(
+                        el,
+                        from,
+                        { 
+                            y: 0, 
+                            opacity: 1, 
+                            duration: 0.8, 
+                            ease: 'power2.out',
+                            clearProps: 'transform' // Clear transform after animation
+                        }
+                    );
+                } else {
+                    // Reset when leaving viewport for re-animation
+                    gsap.to(el, { 
+                        opacity: 0, 
+                        duration: 0.3,
+                        ease: 'power2.in'
+                    });
+                }
+            });
+        }, { 
+            threshold: 0.15,
+            rootMargin: '-50px 0px' // Trigger slightly after entering viewport
+        });
+
+        // Observe semantic sections and direct children inside the smooth wrapper
+        const toObserve = Array.from(document.querySelectorAll('.smooth-scroll-wrapper > section, .smooth-scroll-wrapper section'));
+        toObserve.forEach((el) => {
+            observed.add(el);
+            io.observe(el);
+        });
+
         return () => {
             lenis.destroy();
             gsap.ticker.remove(lenis.raf);
             ctx.revert();
+            window.removeEventListener('wheel', wheelHandler);
+            window.removeEventListener('touchstart', touchStart);
+            window.removeEventListener('touchmove', touchMove);
+            io.disconnect();
         };
     }, []);
 

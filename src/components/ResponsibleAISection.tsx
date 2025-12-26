@@ -40,45 +40,55 @@ export default function ResponsibleAISection() {
                     <div className="grid lg:grid-cols-2 gap-12 items-center mb-16">
                         <div className="space-y-8 animate-reveal">
                             <h2 className="text-4xl md:text-5xl font-medium text-white leading-tight">
-                                Build with AI responsibly
+                                GDG Cloud Pune <br />
+                                Insights
                             </h2>
                             <p className="text-gray-400 text-lg font-light leading-relaxed max-w-lg">
-                                Build trusted and secure AI with guidance for responsible
-                                design, development, and deployment of models and
-                                applications.
+                                GDG Cloud Pune is a hands-on developer community focused on learning-by-doing through workshops, study jams, and collaborative hackathons.
                             </p>
                             <button className="bg-[#1a73e8] hover:bg-[#1967d2] text-white px-8 py-3.5 rounded-full font-medium transition-all shadow-lg hover:shadow-blue-500/20">
-                                Build Responsible AI
+                                Explore Our Community
                             </button>
                         </div>
 
-                        {/* Main Visual: Shield with Icons */}
-                        <div className="relative h-[350px] flex items-center justify-center animate-reveal">
-                            <div className="relative w-full max-w-[300px] aspect-square">
-                                {/* Shield Base */}
-                                <div className="absolute inset-0 bg-blue-500/10 border border-blue-400/20 rounded-[2rem] transform rotate-[15deg] shadow-glow"
-                                    style={{ clipPath: "polygon(50% 0%, 100% 25%, 100% 75%, 50% 100%, 0% 75%, 0% 25%)" }}>
-                                    <div className="absolute inset-0 bg-gradient-to-br from-white/10 to-transparent" />
-                                </div>
-
-                                {/* 2x2 Icon Grid inside Shield */}
-                                <div className="absolute inset-0 grid grid-cols-2 grid-rows-2 p-12 gap-6 scale-90">
-                                    <div className="flex items-center justify-center bg-yellow-500/20 rounded-full border border-yellow-500/40">
-                                        <div className="w-6 h-6 border-2 border-yellow-400 rounded-full flex items-center justify-center">
-                                            <div className="w-1 h-3 bg-yellow-400 rounded-full rotate-45" />
+                        {/* Main Visual: Learning Flow */}
+                        <div className="relative h-[450px] flex items-center justify-center animate-reveal">
+                            <div className="relative w-full max-w-[320px] h-full flex items-center justify-center">
+                                {/* Vertical flow - stacked glass tiles */}
+                                <div className="relative flex flex-col gap-6 w-full">
+                                    {[
+                                        { label: 'Learn', delay: '0s', gradient: 'from-blue-500/20 to-blue-600/10' },
+                                        { label: 'Practice', delay: '0.15s', gradient: 'from-cyan-500/20 to-cyan-600/10' },
+                                        { label: 'Build', delay: '0.3s', gradient: 'from-blue-400/20 to-blue-500/10' },
+                                        { label: 'Community', delay: '0.45s', gradient: 'from-cyan-400/20 to-cyan-500/10' },
+                                    ].map((tile, i) => (
+                                        <div key={i} className="relative">
+                                            {/* Connecting line (except last) */}
+                                            {i < 3 && (
+                                                <div 
+                                                    className="absolute left-1/2 -translate-x-1/2 w-px bg-gradient-to-b from-blue-400/30 to-transparent z-0"
+                                                    style={{
+                                                        top: '100%',
+                                                        height: '24px',
+                                                        animationDelay: tile.delay
+                                                    }}
+                                                />
+                                            )}
+                                            
+                                            {/* Glass tile */}
+                                            <div
+                                                className={`tile-reveal bg-gradient-to-br ${tile.gradient} border border-blue-400/30 rounded-2xl p-6 backdrop-blur-xl shadow-2xl relative z-10`}
+                                                style={{
+                                                    animationDelay: tile.delay,
+                                                    boxShadow: '0 8px 32px rgba(0, 0, 0, 0.4), 0 0 40px rgba(59, 130, 246, 0.15), inset 0 1px 0 rgba(255, 255, 255, 0.1)'
+                                                }}
+                                            >
+                                                <div className="flex items-center justify-center">
+                                                    <span className="text-white text-xl md:text-2xl font-semibold tracking-wide">{tile.label}</span>
+                                                </div>
+                                            </div>
                                         </div>
-                                    </div>
-                                    <div className="flex items-center justify-center bg-red-500/20 rounded-full border border-red-500/40">
-                                        <div className="w-6 h-6 border-2 border-red-400 rounded-full relative">
-                                            <div className="absolute top-0 right-0 w-2 h-2 bg-red-400 rounded-full" />
-                                        </div>
-                                    </div>
-                                    <div className="flex items-center justify-center bg-blue-500/20 rounded-full border border-blue-500/40">
-                                        <div className="text-blue-400 text-xl">✦</div>
-                                    </div>
-                                    <div className="flex items-center justify-center bg-green-500/20 rounded-full border border-green-500/40">
-                                        <div className="w-5 h-6 border-2 border-green-400 rounded-sm" />
-                                    </div>
+                                    ))}
                                 </div>
                             </div>
                         </div>
@@ -86,62 +96,43 @@ export default function ResponsibleAISection() {
 
                     {/* Secondary Cards Grid (Bottom half) */}
                     <div className="grid md:grid-cols-2 gap-6">
-                        {/* Card 1: Build responsible models */}
-                        <div className="bg-[#202124] rounded-[2.5rem] p-8 flex flex-col md:flex-row gap-8 items-center md:items-start animate-reveal group">
-                            <div className="w-48 h-48 flex-shrink-0 bg-black rounded-3xl flex items-center justify-center overflow-hidden border border-white/5 relative">
-                                <div className="absolute inset-0 bg-blue-500/5 blur-2xl" />
-                                {/* Floating Blue Icons visual */}
-                                <div className="relative w-24 h-24">
-                                    <div className="absolute top-2 left-2 w-8 h-8 bg-blue-500/30 rounded-lg flex items-center justify-center">
-                                        <div className="w-0 h-0 border-t-4 border-t-transparent border-b-4 border-b-transparent border-l-6 border-l-blue-400 ml-1" />
-                                    </div>
-                                    <div className="absolute top-10 right-2 w-10 h-10 bg-blue-500/20 rounded-full flex items-center justify-center">
-                                        <div className="w-6 h-6 border border-blue-400/50 rounded-md" />
-                                    </div>
-                                    <div className="absolute bottom-2 left-4 w-12 h-6 bg-blue-500/40 rounded-full flex items-center justify-center">
-                                        <div className="w-8 h-1.5 bg-blue-400/50 rounded-full" />
-                                    </div>
+                        {/* Card 1: Learning Culture */}
+                        <div className="bg-[#202124] rounded-[2.5rem] p-8 flex flex-col md:flex-row gap-8 items-center md:items-start animate-reveal pointer-events-auto">
+                            <div className="w-40 h-40 flex-shrink-0 bg-black rounded-3xl flex items-center justify-center overflow-hidden border border-white/5 relative">
+                                <div className="absolute inset-0 bg-blue-500/5 blur-xl" />
+                                <div className="relative text-5xl">
+                                    📚
                                 </div>
                             </div>
 
-                            <div className="flex-1 space-y-4">
-                                <h3 className="text-2xl font-medium text-white">Build responsible models</h3>
+                            <div className="flex-1 space-y-3">
+                                <h3 className="text-xl font-medium text-white">Learning Culture</h3>
                                 <p className="text-gray-400 font-light text-sm leading-relaxed">
-                                    Tools and guidance to design, build, and evaluate open AI models responsibly.
+                                    Hands-on workshops, study jams, and deep-dive technical sessions.
                                 </p>
-                                <button className="flex items-center gap-2 text-white bg-white/5 border border-white/10 hover:bg-white/10 px-5 py-2.5 rounded-full text-sm font-medium transition-colors">
-                                    <span className="text-blue-400">📄</span> Responsible GenAI Toolkit
-                                </button>
+                                <div className="flex items-center gap-2 text-blue-400 text-sm font-medium">
+                                    <span>50+ Hands-on Sessions</span>
+                                </div>
                             </div>
                         </div>
 
-                        {/* Card 2: Develop secure AI systems */}
-                        <div className="bg-[#202124] rounded-[2.5rem] p-8 flex flex-col md:flex-row gap-8 items-center md:items-start animate-reveal group">
-                            <div className="w-48 h-48 flex-shrink-0 bg-black rounded-3xl flex items-center justify-center overflow-hidden border border-white/5 relative">
-                                <div className="absolute inset-0 bg-blue-500/5 blur-2xl" />
-                                {/* Shield with G visual */}
-                                <div className="relative w-24 h-24 flex items-center justify-center">
-                                    <div className="absolute inset-2 bg-blue-500/20 border border-blue-400/40 rounded-lg"
-                                        style={{ clipPath: "polygon(50% 0%, 100% 25%, 100% 75%, 50% 100%, 0% 75%, 0% 25%)" }} />
-                                    <span className="text-blue-400 text-3xl font-bold relative z-10">G</span>
-                                    {/* Circuit lines */}
-                                    <div className="absolute inset-0 pointer-events-none">
-                                        <div className="absolute top-1/2 left-0 w-6 h-px bg-blue-400/30" />
-                                        <div className="absolute top-1/2 right-0 w-6 h-px bg-blue-400/30" />
-                                        <div className="absolute top-0 left-1/2 h-6 w-px bg-blue-400/30" />
-                                        <div className="absolute bottom-0 left-1/2 h-6 w-px bg-blue-400/30" />
-                                    </div>
+                        {/* Card 2: Builder Community */}
+                        <div className="bg-[#202124] rounded-[2.5rem] p-8 flex flex-col md:flex-row gap-8 items-center md:items-start animate-reveal pointer-events-auto">
+                            <div className="w-40 h-40 flex-shrink-0 bg-black rounded-3xl flex items-center justify-center overflow-hidden border border-white/5 relative">
+                                <div className="absolute inset-0 bg-cyan-500/5 blur-xl" />
+                                <div className="relative text-5xl">
+                                    🛠️
                                 </div>
                             </div>
 
-                            <div className="flex-1 space-y-4">
-                                <h3 className="text-2xl font-medium text-white">Develop secure AI systems</h3>
+                            <div className="flex-1 space-y-3">
+                                <h3 className="text-xl font-medium text-white">Builder Community</h3>
                                 <p className="text-gray-400 font-light text-sm leading-relaxed">
-                                    Build and deploy secure, responsible AI applications with the help of Google's Secure AI Framework (SAIF).
+                                    Developers building real projects through collaborative hackathons.
                                 </p>
-                                <button className="flex items-center gap-2 text-white bg-white/5 border border-white/10 hover:bg-white/10 px-5 py-2.5 rounded-full text-sm font-medium transition-colors">
-                                    <span className="text-blue-400">🛡️</span> Secure AI Framework
-                                </button>
+                                <div className="flex items-center gap-2 text-cyan-400 text-sm font-medium">
+                                    <span>5K+ Active Developers</span>
+                                </div>
                             </div>
                         </div>
                     </div>

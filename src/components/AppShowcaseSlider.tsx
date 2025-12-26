@@ -60,6 +60,13 @@ const apps = [
     }
 ];
 
+const pastMedia = [
+    { title: "Community Gathering", description: "Participants networking and sharing ideas", image: "/20250503_114742_imgupscaler.ai_V1(Fast)_4K.png" },
+    { title: "Workshop Snapshot", description: "Hands-on session during the event", image: "/IMG_0758.JPG" },
+    { title: "Demo Highlights", description: "Projects showcased on demo day", image: "/IMG_0678_imgupscaler.ai_V1(Fast)_4K.png" },
+    { title: "Stage Moments", description: "Awards and closing highlights", image: "/IMG_0684_imgupscaler.ai_V1(Fast)_4K.png" }
+];
+
 export default function AppShowcaseSlider() {
     const scrollContainerRef = useRef<HTMLDivElement>(null);
     const sectionRef = useRef<HTMLDivElement>(null);
@@ -82,6 +89,24 @@ export default function AppShowcaseSlider() {
                 },
             }
         );
+
+        // Pause marquee animation on hover/focus for accessibility
+        const track = scrollContainerRef.current;
+        if (track) {
+            const pause = () => { (track.style as any).animationPlayState = "paused"; };
+            const resume = () => { (track.style as any).animationPlayState = "running"; };
+            track.addEventListener("mouseenter", pause);
+            track.addEventListener("mouseleave", resume);
+            track.addEventListener("focusin", pause);
+            track.addEventListener("focusout", resume);
+
+            return () => {
+                track.removeEventListener("mouseenter", pause);
+                track.removeEventListener("mouseleave", resume);
+                track.removeEventListener("focusin", pause);
+                track.removeEventListener("focusout", resume);
+            };
+        }
     }, []);
 
     const scroll = (direction: "left" | "right") => {
@@ -95,68 +120,45 @@ export default function AppShowcaseSlider() {
 
     return (
         <section ref={sectionRef} className="relative py-24 overflow-hidden">
-            <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 space-y-16">
-                <h2 className="animate-reveal text-center text-4xl md:text-6xl font-medium text-white leading-tight">
-                    Explore apps built with <br />
-                    the Gemini API
-                </h2>
+            <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 space-y-12">
+                <h2 className="animate-reveal text-center text-4xl md:text-5xl font-medium text-white leading-tight">Our Journey</h2>
+                <p className="text-muted-foreground text-lg text-center text-white">Highlights from our previous events and community activities</p>
 
-                <div className="relative animate-reveal">
-                    <div
-                        ref={scrollContainerRef}
-                        className="flex gap-6 overflow-x-auto no-scrollbar snap-x snap-mandatory px-4 md:px-0"
-                    >
-                        {apps.map((app) => (
-                            <div
-                                key={app.id}
-                                className="min-w-[320px] md:min-w-[400px] bg-[#16171a] rounded-[2.5rem] overflow-hidden border border-white/5 flex flex-col snap-start hover:border-white/10 transition-colors group"
-                            >
-                                {/* App Preview Header */}
-                                <div className={`h-64 bg-gradient-to-br ${app.gradient} flex items-center justify-center p-12 transition-transform duration-500 group-hover:scale-[1.02]`}>
-                                    <span className="text-white text-4xl md:text-5xl font-bold tracking-tight opacity-90 group-hover:opacity-100 transition-opacity">
-                                        {app.logo}
-                                    </span>
+                {/* Infinite photos marquee using duplicated list for seamless loop */}
+                <div className="relative overflow-hidden rounded-2xl border border-white/5 bg-[#0f1113] py-8">
+                    <div className="marquee" role="region" aria-label="Event highlights carousel">
+                        <div className="marquee-track" ref={scrollContainerRef}>
+                            {/** render two copies for seamless loop */}
+                            {[0, 1].map((copyIdx) => (
+                                <div key={copyIdx} className="marquee-group flex gap-6 px-8">
+                                    {pastMedia.map((m, i) => {
+                                        const titleId = `pastmedia-title-${copyIdx}-${i}`;
+                                        return (
+                                            <figure
+                                                key={`${copyIdx}-${i}`}
+                                                className="w-[320px] md:w-[420px] flex-shrink-0 rounded-xl overflow-hidden bg-[#0b0c0d] shadow-md"
+                                                role="group"
+                                                aria-labelledby={titleId}
+                                            >
+                                                <div className="h-56 md:h-64 relative">
+                                                    <img src={m.image} alt={m.title} className="w-full h-full object-cover block" />
+                                                </div>
+                                                <figcaption className="p-4 bg-[#070708]">
+                                                    <h3 id={titleId} className="text-sm md:text-base text-white font-medium">{m.title}</h3>
+                                                    <p className="text-xs text-gray-400 mt-1">{m.description}</p>
+                                                </figcaption>
+                                            </figure>
+                                        );
+                                    })}
                                 </div>
-
-                                {/* App Info Body */}
-                                <div className="p-8 space-y-4 flex-1 flex flex-col justify-between">
-                                    <div className="space-y-4">
-                                        <h3 className="text-xl font-medium text-white">{app.title}</h3>
-                                        <p className="text-gray-400 font-light text-sm leading-relaxed">
-                                            {app.description}
-                                        </p>
-                                    </div>
-                                    <div className="pt-6">
-                                        <button className="bg-[#1c1d20] hover:bg-[#2c2d30] text-white border border-white/10 px-6 py-2.5 rounded-full text-sm font-medium transition-all active:scale-95">
-                                            View
-                                        </button>
-                                    </div>
-                                </div>
-                            </div>
-                        ))}
+                            ))}
+                        </div>
                     </div>
 
-                    {/* Navigation Buttons */}
-                    <div className="flex justify-start gap-4 mt-8 px-4">
-                        <button
-                            onClick={() => scroll("left")}
-                            className="w-12 h-12 rounded-full bg-[#1c1d20] border border-white/10 flex items-center justify-center text-white hover:bg-[#2c2d30] transition-colors"
-                        >
-                            <svg className="w-6 h-6" fill="none" viewBox="0 0 24 24" stroke="currentColor">
-                                <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M15 19l-7-7 7-7" />
-                            </svg>
-                        </button>
-                        <button
-                            onClick={() => scroll("right")}
-                            className="w-12 h-12 rounded-full bg-[#1c1d20] border border-white/10 flex items-center justify-center text-white hover:bg-[#2c2d30] transition-colors"
-                        >
-                            <svg className="w-6 h-6" fill="none" viewBox="0 0 24 24" stroke="currentColor">
-                                <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M9 5l7 7-7 7" />
-                            </svg>
-                        </button>
-                    </div>
+                    
                 </div>
             </div>
         </section>
     );
 }
+

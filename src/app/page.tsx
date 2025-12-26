@@ -9,6 +9,9 @@ import ResponsibleAISection from "@/components/ResponsibleAISection";
 import CodeAssistanceSection from "@/components/CodeAssistanceSection";
 import CommunitySection from "@/components/CommunitySection";
 import AppShowcaseSlider from "@/components/AppShowcaseSlider";
+import OrganizersSection from "@/components/OrganizersSection";
+import DevelopersSection from "@/components/DevelopersSection";
+import FAQSection from "@/components/FAQSection";
 import dynamic from "next/dynamic";
 
 const TimelineSection = dynamic(() => import("@/components/TimelineSection"), {
@@ -28,6 +31,9 @@ export default function Home() {
       <TimelineSection />
       <CodeAssistanceSection />
       <AppShowcaseSlider />
+      <OrganizersSection />
+      <DevelopersSection />
+      <FAQSection />
       <CommunitySection />
 
       <Footer />
