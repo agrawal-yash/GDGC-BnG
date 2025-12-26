@@ -9,16 +9,20 @@ if (typeof window !== "undefined") {
 }
 
 const tabs = [
-    { id: "agents", label: "Agents" },
-    { id: "analysis", label: "Analysis and insights" },
-    { id: "generation", label: "Code generation" },
-    { id: "chat", label: "Code chat" },
+    { id: "health", label: "Health Tech" },
+    { id: "fintech", label: "FinTech" },
+    { id: "cyber", label: "Cyber Security" },
+    { id: "edu", label: "Edu Tech" },
+    { id: "agri", label: "Agri Tech" },
 ];
 
 export default function CodeAssistanceSection() {
-    const [activeTab, setActiveTab] = useState("agents");
+    const [activeTab, setActiveTab] = useState("health");
     const sectionRef = useRef<HTMLDivElement>(null);
     const contentRef = useRef<HTMLDivElement>(null);
+
+    const activeTabIndex = tabs.findIndex(t => t.id === activeTab);
+    const sequenceNumber = (activeTabIndex + 1).toString().padStart(2, '0');
 
     useEffect(() => {
         if (!sectionRef.current) return;
@@ -51,146 +55,139 @@ export default function CodeAssistanceSection() {
 
     const renderContent = () => {
         switch (activeTab) {
-            case "agents":
+            case "health":
                 return (
                     <div className="grid lg:grid-cols-2 gap-12 items-center w-full">
                         <div className="space-y-6">
-                            <h3 className="text-3xl font-medium text-white">Agents</h3>
+                            <div className="flex items-center justify-between mb-4">
+                                <h3 className="text-3xl font-medium text-white flex items-center gap-3">
+                                    Health Tech: Smarter healthcare and diagnostics
+                                </h3>
+                                <span className="text-[10px] bg-green-500/10 text-green-400 px-3 py-1 rounded-full border border-green-500/20 font-bold uppercase tracking-wider">All Levels</span>
+                            </div>
                             <p className="text-gray-400 text-lg font-light leading-relaxed">
-                                Gemini empowers you to be more productive by acting as your
-                                coding agent. It can plan and execute tasks, freeing you to focus on
-                                what matters most.
+                                Build AI solutions to improve diagnostics, patient monitoring, and healthcare workflows.
                             </p>
                         </div>
-                        <div className="relative bg-[#0d0e10] rounded-2xl border border-white/10 p-8 shadow-2xl overflow-hidden min-h-[350px] flex items-center justify-center">
-                            {/* Mock Editor */}
-                            <div className="w-full space-y-4 font-mono text-sm opacity-60">
-                                <div className="flex gap-2 text-xs border-b border-white/5 pb-2 mb-4">
-                                    <span className="text-blue-400">SubmitButton.js</span>
-                                    <span className="text-gray-600">Updated</span>
+                        <div className="relative bg-[#0d0e10] rounded-2xl border border-white/10 p-8 shadow-2xl overflow-hidden min-h-[350px] flex items-center justify-center text-blue-400">
+                            <div className="relative w-32 h-32 flex items-center justify-center opacity-80">
+                                <svg viewBox="0 0 100 100" className="w-full h-full stroke-current fill-none">
+                                    <path d="M10,50 L20,50 L30,20 L45,80 L60,10 L75,50 L90,50" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" />
+                                </svg>
+                                <div className="absolute inset-0 bg-blue-500/10 blur-xl rounded-full" />
+                            </div>
+                            <div className="absolute top-10 right-10 bg-white/5 border border-white/10 px-4 py-2 rounded-lg text-xs">
+                                ✦ Real-time Patient Monitoring
+                            </div>
+                        </div>
+                    </div>
+                );
+            case "fintech":
+                return (
+                    <div className="grid lg:grid-cols-2 gap-12 items-center w-full">
+                        <div className="space-y-6">
+                            <div className="flex items-center justify-between mb-4">
+                                <h3 className="text-3xl font-medium text-white flex items-center gap-3">
+                                    FinTech: Financial automation and fraud prevention
+                                </h3>
+                                <span className="text-[10px] bg-green-500/10 text-green-400 px-3 py-1 rounded-full border border-green-500/20 font-bold uppercase tracking-wider">All Levels</span>
+                            </div>
+                            <p className="text-gray-400 text-lg font-light leading-relaxed">
+                                Create tools for payment automation, risk analysis, or real-time fraud detection.
+                            </p>
+                        </div>
+                        <div className="relative bg-[#0d0e10] rounded-2xl border border-white/10 p-8 shadow-2xl min-h-[350px] flex flex-col justify-center items-center text-green-400">
+                            <div className="flex gap-4 items-end h-32">
+                                <div className="w-6 bg-green-500/20 rounded-t h-1/2" />
+                                <div className="w-6 bg-green-500/40 rounded-t h-3/4" />
+                                <div className="w-6 bg-green-500/60 rounded-t h-full shadow-[0_0_15px_rgba(34,197,94,0.3)]" />
+                                <div className="w-6 bg-green-500/40 rounded-t h-2/3" />
+                                <div className="w-6 bg-green-500/80 rounded-t h-[90%]" />
+                            </div>
+                            <div className="mt-8 text-xs text-gray-500 font-mono">
+                                PREDICTED MARKET GROWTH +14.2%
+                            </div>
+                        </div>
+                    </div>
+                );
+            case "cyber":
+                return (
+                    <div className="grid lg:grid-cols-2 gap-12 items-center w-full">
+                        <div className="space-y-6">
+                            <div className="flex items-center justify-between mb-4">
+                                <h3 className="text-3xl font-medium text-white flex items-center gap-3">
+                                    Cyber Security: AI-powered protection and threat detection
+                                </h3>
+                                <span className="text-[10px] bg-green-500/10 text-green-400 px-3 py-1 rounded-full border border-green-500/20 font-bold uppercase tracking-wider">All Levels</span>
+                            </div>
+                            <p className="text-gray-400 text-lg font-light leading-relaxed">
+                                Design systems that leverage AI to detect, prevent, and respond to security threats.
+                            </p>
+                        </div>
+                        <div className="relative bg-[#0d0e10] rounded-2xl border border-white/10 p-12 shadow-2xl min-h-[350px] flex flex-col items-center justify-center">
+                            <div className="w-24 h-24 border-2 border-red-500/40 rounded-[20%] relative flex items-center justify-center shadow-[0_0_30px_rgba(239,68,68,0.1)]">
+                                <div className="w-10 h-12 bg-red-500/20 rounded-sm relative">
+                                    <div className="absolute top-2 left-1/2 -translate-x-1/2 w-4 h-4 border-2 border-red-400/50 rounded-full" />
                                 </div>
-                                <div className="text-gray-500">const [isButtonDisabled, setButtonDisable]</div>
-                                <div className="text-blue-400">function handleChange(event) {'{'}</div>
-                                <div className="text-gray-300 ml-4">setIsButtonDisabled(event.target.value.tr)</div>
-                                <div className="text-blue-400">{'}'}</div>
+                                <div className="absolute -top-4 -right-4 bg-red-500 text-white text-[10px] px-2 py-1 rounded font-bold">STP THREAT</div>
                             </div>
-                            {/* Floating prompt */}
-                            <div className="absolute top-1/4 right-[10%] bg-white text-black px-5 py-2.5 rounded-full text-xs font-semibold shadow-2xl flex items-center gap-3">
-                                <span className="bg-black text-white rounded-full w-5 h-5 flex items-center justify-center text-[10px]">1</span>
-                                Help me style a submit button
+                        </div>
+                    </div>
+                );
+            case "edu":
+                return (
+                    <div className="grid lg:grid-cols-2 gap-12 items-center w-full">
+                        <div className="space-y-6">
+                            <div className="flex items-center justify-between mb-4">
+                                <h3 className="text-3xl font-medium text-white flex items-center gap-3">
+                                    Edu Tech: Learning accessibility and skill-building platforms
+                                </h3>
+                                <span className="text-[10px] bg-green-500/10 text-green-400 px-3 py-1 rounded-full border border-green-500/20 font-bold uppercase tracking-wider">All Levels</span>
                             </div>
-                            <div className="absolute bottom-10 right-10 bg-blue-600 p-3 rounded-xl shadow-blue-500/20 shadow-xl">
-                                <svg className="w-5 h-5 text-white" fill="none" viewBox="0 0 24 24" stroke="currentColor">
-                                    <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2.5} d="M5 13l4 4L19 7" />
+                            <p className="text-gray-400 text-lg font-light leading-relaxed">
+                                Build platforms that personalize learning, assessment, and skill development at scale.
+                            </p>
+                        </div>
+                        <div className="relative bg-[#0d0e10] rounded-2xl border border-white/10 p-0 shadow-2xl min-h-[400px] overflow-hidden flex items-center justify-center">
+                            <div className="relative w-48 h-32 border-2 border-purple-500/30 rounded-lg p-4 bg-purple-500/5">
+                                <div className="h-2 w-full bg-white/10 rounded mb-2" />
+                                <div className="h-2 w-3/4 bg-white/10 rounded mb-4" />
+                                <div className="grid grid-cols-4 gap-2">
+                                    <div className="aspect-square bg-purple-500/40 rounded-sm" />
+                                    <div className="aspect-square bg-purple-500/20 rounded-sm" />
+                                    <div className="aspect-square bg-purple-500/60 rounded-sm" />
+                                    <div className="aspect-square bg-purple-500/10 rounded-sm" />
+                                </div>
+                                <div className="absolute -bottom-4 -left-4 bg-purple-500 text-white text-[10px] px-3 py-1 rounded-full shadow-lg">LEARNING PATH</div>
+                            </div>
+                        </div>
+                    </div>
+                );
+            case "agri":
+                return (
+                    <div className="grid lg:grid-cols-2 gap-12 items-center w-full">
+                        <div className="space-y-6">
+                            <div className="flex items-center justify-between mb-4">
+                                <h3 className="text-3xl font-medium text-white flex items-center gap-3">
+                                    Agri Tech: Smart farming and agricultural innovations
+                                </h3>
+                                <span className="text-[10px] bg-green-500/10 text-green-400 px-3 py-1 rounded-full border border-green-500/20 font-bold uppercase tracking-wider">All Levels</span>
+                            </div>
+                            <p className="text-gray-400 text-lg font-light leading-relaxed">
+                                Use AI and IoT to optimize crop yields, resource usage, and supply-chain visibility.
+                            </p>
+                        </div>
+                        <div className="relative bg-[#0d0e10] rounded-2xl border border-white/10 p-8 shadow-2xl min-h-[350px] flex flex-col items-center justify-center text-teal-400">
+                            <div className="relative w-24 h-24">
+                                <div className="absolute inset-0 bg-teal-500/20 blur-2xl rounded-full" />
+                                <svg viewBox="0 0 24 24" className="w-full h-full fill-current">
+                                    <path d="M12,2L1,21H23L12,2M12,6L19.53,19H4.47L12,6Z" />
+                                    <path d="M12,9L15,14H9L12,9Z" className="opacity-50" />
                                 </svg>
                             </div>
-                        </div>
-                    </div>
-                );
-            case "analysis":
-                return (
-                    <div className="grid lg:grid-cols-2 gap-12 items-center w-full">
-                        <div className="space-y-6">
-                            <h3 className="text-3xl font-medium text-white">Analysis and insights</h3>
-                            <p className="text-gray-400 text-lg font-light leading-relaxed">
-                                Improve code quality and fix issues with code analysis. Get insights,
-                                suggestions, and code snippets within your existing development
-                                environment.
-                            </p>
-                        </div>
-                        <div className="relative bg-[#0d0e10] rounded-2xl border border-white/10 p-8 shadow-2xl min-h-[350px] flex flex-col justify-end">
-                            <div className="bg-[#1c1d20] rounded-xl p-6 space-y-4 border border-white/5 shadow-inner">
-                                <div className="flex items-center gap-2 text-blue-400 text-sm font-medium">
-                                    <span className="text-lg">✦</span> Gemini
-                                </div>
-                                <div className="space-y-3">
-                                    <div className="bg-white/5 p-3 rounded-lg text-xs text-gray-400">
-                                        How can I make sure that my Cloud Firestore rules are secure? Let's think step by step
-                                    </div>
-                                    <div className="bg-blue-500/5 p-3 rounded-lg text-xs text-blue-300 border border-blue-500/10">
-                                        I'm creating a chat app running on web, Android and iOS. What's the best way to structure my Cloud Firestore collections?
-                                    </div>
-                                </div>
-                                <div className="pt-2">
-                                    <div className="w-full bg-[#0d0e10] rounded-full px-5 py-2.5 text-xs border border-white/10 text-gray-500 flex justify-between items-center">
-                                        Ask me something about Firebase
-                                        <span className="text-gray-600">➤</span>
-                                    </div>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-                );
-            case "generation":
-                return (
-                    <div className="grid lg:grid-cols-2 gap-12 items-center w-full">
-                        <div className="space-y-6">
-                            <h3 className="text-3xl font-medium text-white">Code generation</h3>
-                            <p className="text-gray-400 text-lg font-light leading-relaxed">
-                                Gemini adds AI-powered code completion with natural language
-                                understanding to create entire code blocks from your descriptions,
-                                revolutionizing your development workflow.
-                            </p>
-                        </div>
-                        <div className="relative bg-[#0d0e10] rounded-2xl border border-white/10 p-12 shadow-2xl min-h-[350px] font-mono text-sm space-y-3">
-                            <div className="text-gray-600">@Preview</div>
-                            <div className="text-gray-600">@Composable</div>
-                            <div className="flex items-center gap-2">
-                                <span className="text-purple-400 font-bold">fun</span>
-                                <span className="text-white border-r-2 border-blue-500 h-5"> pre</span>
-                            </div>
-                            <div className="mt-8 bg-[#1c1d20] border-l-4 border-blue-500 rounded-r-lg p-5 flex items-center justify-between shadow-2xl">
-                                <div className="flex items-center gap-3">
-                                    <span className="text-blue-400 text-sm">✦ prev</span>
-                                    <span className="text-gray-500 text-xs">Create @Preview composable function</span>
-                                </div>
-                            </div>
-                            <div className="absolute bottom-10 right-10 bg-blue-600 text-white text-[10px] px-4 py-2 rounded-full flex items-center gap-2 shadow-2xl shadow-blue-500/20">
-                                Press <span className="font-bold">→</span> to accept suggestions
-                            </div>
-                        </div>
-                    </div>
-                );
-            case "chat":
-                return (
-                    <div className="grid lg:grid-cols-2 gap-12 items-center w-full">
-                        <div className="space-y-6">
-                            <h3 className="text-3xl font-medium text-white">Code chat</h3>
-                            <p className="text-gray-400 text-lg font-light leading-relaxed">
-                                Ask development questions and receive responses that help you
-                                reduce errors, solve problems, and become a better developer.
-                                Gemini understands the context of your environment to give you the
-                                best responses for your questions.
-                            </p>
-                        </div>
-                        <div className="relative bg-[#0d0e10] rounded-2xl border border-white/10 p-0 shadow-2xl min-h-[400px] overflow-hidden">
-                            <div className="flex flex-col h-full">
-                                <div className="bg-[#1c1d20] p-4 text-xs border-b border-white/5 flex items-center justify-between text-gray-400">
-                                    <div className="flex items-center gap-2">
-                                        <div className="w-2.5 h-2.5 rounded-full bg-white/10" />
-                                        <div className="w-2.5 h-2.5 rounded-full bg-white/10" />
-                                        <div className="w-2.5 h-2.5 rounded-full bg-white/10" />
-                                    </div>
-                                    <span className="font-medium">Gemini Code Chat</span>
-                                    <div />
-                                </div>
-                                <div className="flex-1 p-6 space-y-6 overflow-y-auto">
-                                    <div className="flex gap-4 justify-end">
-                                        <div className="bg-blue-600/10 border border-blue-500/20 p-4 rounded-[1.5rem] rounded-tr-none text-xs text-blue-100 max-w-[85%] leading-relaxed">
-                                            What should I use, Cloud SQL or Cloud Firestore? And show some simple code snippet.
-                                        </div>
-                                    </div>
-                                    <div className="flex gap-4">
-                                        <div className="w-8 h-8 rounded-full bg-gradient-to-br from-blue-400 to-purple-600 flex items-center justify-center text-xs flex-shrink-0">✦</div>
-                                        <div className="bg-white/5 border border-white/5 p-4 rounded-[1.5rem] rounded-tl-none text-xs text-gray-300 max-w-[85%] space-y-4 leading-relaxed">
-                                            <p>Cloud SQL and Cloud Firestore are both powerful but serve different needs. Cloud Firestore is better for real-time sync...</p>
-                                            <div className="bg-black/40 p-3 rounded-lg font-mono text-[10px] text-blue-400/80 border border-white/5">
-                                                import {'{'} doc, setDoc {'}'} from "firebase/firestore";<br />
-                                                await setDoc(doc(db, "cities", "LA"), {'{'} ... {'}'});
-                                            </div>
-                                        </div>
-                                    </div>
-                                </div>
+                            <div className="mt-8 flex gap-2">
+                                <span className="w-2 h-2 rounded-full bg-teal-500 animate-pulse" />
+                                <span className="text-[10px] text-teal-500 font-mono tracking-widest uppercase">Precision Analysis Active</span>
                             </div>
                         </div>
                     </div>
@@ -206,8 +203,7 @@ export default function CodeAssistanceSection() {
 
                 <div className="text-center space-y-8">
                     <h2 className="animate-reveal text-4xl md:text-6xl font-medium text-white leading-tight">
-                        Boost productivity with AI <br />
-                        code assistance
+                        Problem Statements
                     </h2>
 
                     {/* Tabs Navigation */}
@@ -229,7 +225,12 @@ export default function CodeAssistanceSection() {
 
                 {/* Main Content Box */}
                 <div className="bg-[#16171a] rounded-[3rem] p-8 md:p-20 border border-white/5 relative overflow-hidden shadow-2xl min-h-[550px] flex items-center">
-                    <div ref={contentRef} className="w-full h-full">
+                    {/* Sequence Number */}
+                    <div className="absolute top-8 left-12 text-8xl font-bold text-white/[0.03] select-none pointer-events-none">
+                        {sequenceNumber}
+                    </div>
+
+                    <div ref={contentRef} className="w-full h-full relative z-10">
                         {renderContent()}
                     </div>
 

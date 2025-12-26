@@ -9,6 +9,11 @@ import ResponsibleAISection from "@/components/ResponsibleAISection";
 import CodeAssistanceSection from "@/components/CodeAssistanceSection";
 import CommunitySection from "@/components/CommunitySection";
 import AppShowcaseSlider from "@/components/AppShowcaseSlider";
+import dynamic from "next/dynamic";
+
+const TimelineSection = dynamic(() => import("@/components/TimelineSection"), {
+  loading: () => <div className="h-96 w-full animate-pulse bg-white/5 rounded-3xl" />
+});
 
 export default function Home() {
   return (
@@ -20,6 +25,7 @@ export default function Home() {
       <GemmaSection />
       <EdgeSection />
       <ResponsibleAISection />
+      <TimelineSection />
       <CodeAssistanceSection />
       <AppShowcaseSlider />
       <CommunitySection />
