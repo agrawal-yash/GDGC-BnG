@@ -208,18 +208,34 @@ export default function CodeAssistanceSection() {
 
                     {/* Tabs Navigation */}
                     <div className="animate-reveal flex flex-wrap justify-center gap-2 sm:gap-3 md:gap-4 mt-8 sm:mt-10 md:mt-12 px-2 sm:px-4">
-                        {tabs.map((tab) => (
-                            <button
-                                key={tab.id}
-                                onClick={() => setActiveTab(tab.id)}
-                                className={`px-4 sm:px-6 md:px-8 py-2 sm:py-2.5 md:py-3 rounded-full text-xs sm:text-sm font-medium transition-all duration-300 border ${activeTab === tab.id
-                                    ? "bg-blue-600/20 border-blue-500 text-white shadow-glow"
-                                    : "bg-white/5 border-white/10 text-gray-400 hover:bg-white/10"
-                                    }`}
-                            >
-                                {tab.label}
-                            </button>
-                        ))}
+                        {tabs.map((tab) => {
+                            // Google-like RGB colors for each tab
+                            const colorMap: Record<string, string> = {
+                                health: '234,67,53',    // red (Google Red)
+                                fintech: '52,168,83',  // green
+                                cyber: '66,133,244',   // blue
+                                edu: '251,188,5',      // yellow
+                                agri: '0,172,193'      // teal
+                            };
+
+                            const rgb = colorMap[tab.id] || '59,130,246';
+                            const isActive = activeTab === tab.id;
+
+                            return (
+                                <button
+                                    key={tab.id}
+                                    onClick={() => setActiveTab(tab.id)}
+                                    className={`px-4 sm:px-6 md:px-8 py-2 sm:py-2.5 md:py-3 rounded-full text-xs sm:text-sm font-medium transition-all duration-300 border ${isActive ? 'text-white' : 'bg-white/5 border-white/10 text-gray-400 hover:bg-white/10'}`}
+                                    style={isActive ? {
+                                        backgroundColor: `rgba(${rgb}, 0.12)`,
+                                        borderColor: `rgba(${rgb}, 0.28)`,
+                                        boxShadow: `0 8px 30px rgba(${rgb}, 0.12)`
+                                    } : undefined}
+                                >
+                                    {tab.label}
+                                </button>
+                            );
+                        })}
                     </div>
                 </div>
 
