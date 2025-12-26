@@ -90,7 +90,7 @@ export default function OrganizersSection() {
   }, [animationComplete]);
 
   return (
-    <section ref={sectionRef} className="relative py-20 px-4 sm:px-6 lg:px-8">
+    <section id="organizers" ref={sectionRef} className="relative py-20 px-4 sm:px-6 lg:px-8">
       <div className="relative z-10 max-w-7xl mx-auto">
         <div className="text-center mb-10">
           <h2 className="text-3xl md:text-5xl font-semibold text-white">Organizers</h2>

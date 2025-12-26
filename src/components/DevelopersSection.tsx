@@ -6,7 +6,7 @@ import gsap from "gsap";
 const developers = [
   {
     name: "Vinit Surve",
-    title: "Next JS Dev",
+    title: "Full Stack Developer",
     affiliation: "GDG OC Organizer • GDG Cloud Mumbai Member",
     image: "/Vinit Surve.jpg",
     github: "https://github.com/VinitSurve",

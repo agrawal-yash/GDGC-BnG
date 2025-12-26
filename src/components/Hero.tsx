@@ -32,7 +32,7 @@ export default function Hero() {
     }, []);
 
     return (
-        <section className="relative pt-32 pb-20 px-4 sm:px-6 lg:px-8 min-h-[90vh] flex items-center">
+        <section id="home" className="relative pt-32 pb-20 px-4 sm:px-6 lg:px-8 min-h-[90vh] flex items-center">
             {/* Using global ContinuousBackground */}
 
             <div className="relative z-10 max-w-[1440px] mx-auto w-full grid lg:grid-cols-2 gap-16 items-center">

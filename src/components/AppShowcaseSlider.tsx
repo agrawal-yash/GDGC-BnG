@@ -119,7 +119,8 @@ export default function AppShowcaseSlider() {
     };
 
     return (
-        <section ref={sectionRef} className="relative py-24 overflow-hidden">
+        <section id="journey" ref={sectionRef} className="relative py-24 overflow-hidden">
+            <div id="our-journey" className="sr-only" />
             <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 space-y-12">
                 <h2 className="animate-reveal text-center text-4xl md:text-5xl font-medium text-white leading-tight">Our Journey</h2>
                 <p className="text-muted-foreground text-lg text-center text-white">Highlights from our previous events and community activities</p>

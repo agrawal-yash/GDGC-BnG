@@ -44,7 +44,7 @@ export default function CommunitySection() {
     }, []);
 
     return (
-        <section ref={sectionRef} className="relative py-32 px-4 sm:px-6 lg:px-8 overflow-hidden">
+        <section id="community" ref={sectionRef} className="relative py-32 px-4 sm:px-6 lg:px-8 overflow-hidden">
             {/* Architectural Framing Lines */}
             <div className="absolute inset-0 pointer-events-none z-0">
                 <div className="max-w-[1440px] mx-auto h-full relative">

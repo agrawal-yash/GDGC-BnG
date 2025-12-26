@@ -86,7 +86,7 @@ export default function TimelineSection() {
     }, []);
 
     return (
-        <section ref={containerRef} className="relative py-24 px-4 sm:px-6 lg:px-8 overflow-hidden">
+        <section id="timeline" ref={containerRef} className="relative py-24 px-4 sm:px-6 lg:px-8 overflow-hidden">
             <div className="max-w-4xl mx-auto space-y-12">
                 <div className="text-center space-y-4 mb-20 animate-reveal">
                     <h2 className="text-4xl md:text-5xl font-medium text-white tracking-tight">

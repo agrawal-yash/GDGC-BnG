@@ -32,7 +32,7 @@ export default function EdgeSection() {
     }, []);
 
     return (
-        <section ref={sectionRef} className="relative py-12 px-4 sm:px-6 lg:px-8">
+        <section id="insights" ref={sectionRef} className="relative py-12 px-4 sm:px-6 lg:px-8">
             <div className="max-w-7xl mx-auto bg-[#16171a] rounded-[3rem] p-8 md:p-16 border border-white/5 relative overflow-hidden shadow-2xl">
 
                 <div className="relative z-10">

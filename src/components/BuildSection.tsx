@@ -45,7 +45,7 @@ export default function BuildSection() {
     }, []);
 
     return (
-        <section ref={containerRef} className="relative py-32 px-4 sm:px-6 lg:px-8">
+        <section id="build" ref={containerRef} className="relative py-32 px-4 sm:px-6 lg:px-8">
             {/* Complex Architectural Framing Lines from Image */}
             <div className="absolute inset-x-0 top-0 h-full pointer-events-none z-0">
                 <div className="max-w-[1440px] mx-auto h-full relative">

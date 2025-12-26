@@ -198,7 +198,7 @@ export default function CodeAssistanceSection() {
     };
 
     return (
-        <section ref={sectionRef} className="relative py-24 px-4 sm:px-6 lg:px-8">
+        <section id="problems" ref={sectionRef} className="relative py-24 px-4 sm:px-6 lg:px-8">
             <div className="max-w-7xl mx-auto space-y-16">
 
                 <div className="text-center space-y-8">

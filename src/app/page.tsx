@@ -24,7 +24,7 @@ export default function Home() {
       <ContinuousBackground />
       <Navbar />
       <Hero />
-      <BuildSection />
+      {/* <BuildSection /> */}
       <GemmaSection />
       <EdgeSection />
       <ResponsibleAISection />

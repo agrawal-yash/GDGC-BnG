@@ -1,58 +1,85 @@
 "use client";
 
-import Link from 'next/link';
 import { useState } from 'react';
+
+const navLinks = [
+    { label: 'Journey', href: '#journey' },
+    { label: 'Collaboration', href: '#collaboration' },
+    { label: 'Insights', href: '#insights' },
+    { label: 'Timeline', href: '#timeline' },
+    { label: 'Problem Statements', href: '#problems' },
+    { label: 'Our Journey', href: '#our-journey' },
+    { label: 'Organizers', href: '#organizers' },
+    { label: 'FAQ', href: '#faq' },
+    { label: 'Community', href: '#community' },
+];
 
 export default function Navbar() {
     const [isMobileMenuOpen, setIsMobileMenuOpen] = useState(false);
 
+    const handleScroll = (e: React.MouseEvent<HTMLAnchorElement>, href: string) => {
+        e.preventDefault();
+        const target = document.querySelector(href);
+        if (target) {
+            const navHeight = 64; // h-16 = 64px
+            const targetPosition = target.getBoundingClientRect().top + window.pageYOffset - navHeight;
+            window.scrollTo({ top: targetPosition, behavior: 'smooth' });
+            setIsMobileMenuOpen(false);
+        }
+    };
+
     return (
         <nav className="fixed top-0 left-0 right-0 z-50 bg-[#0b0c10]/80 backdrop-blur-md border-b border-white/10">
-            <div className="max-w-[1440px] mx-auto px-4 sm:px-6 lg:px-8 h-16 flex items-center justify-between">
-                {/* Left Side: Logo & Main Nav */}
-                <div className="flex items-center gap-8">
-                    <Link href="/" className="flex items-center gap-2 group">
+            <div className="max-w-[1440px] mx-auto px-4 sm:px-6 lg:px-8 h-16 flex items-center">
+                {/* Left: Logo */}
+                <div className="flex items-center mr-4 lg:mr-8">
+                    <a 
+                        href="#journey" 
+                        onClick={(e) => handleScroll(e, '#journey')}
+                        className="flex items-center gap-2 group"
+                    >
                         <span className="text-xl font-medium tracking-tight text-white/90 group-hover:text-white transition-colors">
-                            Google AI <span className="text-white/60 font-normal">for Developers</span>
+                            Build & Grow
                         </span>
-                    </Link>
+                    </a>
+                </div>
 
-                    <div className="hidden md:flex items-center gap-6">
-                        <NavLink href="#" label="Models" hasDropdown />
-                        <NavLink href="#" label="Solutions" hasDropdown />
-                        <NavLink href="#" label="Code assistance" hasDropdown />
-                        <NavLink href="#" label="Showcase" hasDropdown />
-                        <NavLink href="#" label="Community" hasDropdown />
+                {/* Center: Nav (visible on extra-large screens, centered) */}
+                <div className="hidden xl:flex flex-1 justify-center">
+                    <div className="flex items-center gap-6">
+                        {navLinks.map((link) => (
+                            <NavLink 
+                                key={link.label} 
+                                href={link.href} 
+                                label={link.label}
+                                onClick={handleScroll}
+                            />
+                        ))}
                     </div>
                 </div>
 
-                {/* Right Side: Tools & Actions */}
-                <div className="hidden md:flex items-center gap-4">
-                    <div className="relative group">
-                        <div className="flex items-center gap-2 px-3 py-1.5 rounded-full bg-white/10 hover:bg-white/15 transition-colors border border-white/5 text-sm text-gray-300 w-64 cursor-text">
-                            <svg className="w-4 h-4 text-gray-400" fill="none" viewBox="0 0 24 24" stroke="currentColor">
-                                <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M21 21l-6-6m2-5a7 7 0 11-14 0 7 7 0 0114 0z" />
-                            </svg>
-                            <span>Search</span>
-                            <span className="ml-auto text-xs bg-white/10 px-1.5 py-0.5 rounded text-gray-400">/</span>
-                        </div>
-                    </div>
-
-                    <button className="text-gray-300 hover:text-white transition-colors">
-                        {/* Theme Toggle placeholder */}
-                        <svg className="w-5 h-5" fill="none" viewBox="0 0 24 24" stroke="currentColor">
-                            <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M12 3v1m0 16v1m9-9h-1M4 12H3m15.364 6.364l-.707-.707M6.343 6.343l-.707-.707m12.728 0l-.707.707M6.343 17.657l-.707.707M16 12a4 4 0 11-8 0 4 4 0 018 0z" />
-                        </svg>
+                {/* Right Side: Register CTA (visible on extra-large screens) */}
+                <div className="hidden xl:flex items-center gap-4">
+                    <button 
+                        onClick={(e) => {
+                            e.preventDefault();
+                            // Scroll to hero or open registration link
+                            const target = document.querySelector('#journey');
+                            if (target) {
+                                const navHeight = 64;
+                                const targetPosition = target.getBoundingClientRect().top + window.pageYOffset - navHeight;
+                                window.scrollTo({ top: targetPosition, behavior: 'smooth' });
+                            }
+                        }}
+                        className="bg-[#1a73e8] hover:bg-[#1967d2] text-white px-6 py-2 rounded-full font-medium text-sm transition-all shadow-lg hover:shadow-blue-500/20"
+                    >
+                        Register Now
                     </button>
-
-                    <Link href="#" className="text-sm font-medium text-blue-400 hover:text-blue-300 px-4 py-2 border border-blue-400/30 rounded hover:bg-blue-400/10 transition-all">
-                        Sign in
-                    </Link>
                 </div>
 
-                {/* Mobile Menu Button */}
+                {/* Mobile Menu Button (tablet + mobile) — positioned top-right */}
                 <button
-                    className="md:hidden text-gray-300 p-2"
+                    className="xl:hidden absolute right-4 top-3 text-gray-300 p-2 z-50"
                     onClick={() => setIsMobileMenuOpen(!isMobileMenuOpen)}
                 >
                     <svg className="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24">
@@ -63,17 +90,32 @@ export default function Navbar() {
 
             {/* Mobile Menu */}
             {isMobileMenuOpen && (
-                <div className="md:hidden bg-[#0b0c10] border-b border-white/10">
-                    <div className="px-4 py-4 space-y-4">
-                        <div className="space-y-2">
-                            <MobileNavLink href="#" label="Models" />
-                            <MobileNavLink href="#" label="Solutions" />
-                            <MobileNavLink href="#" label="More" />
-                        </div>
+                <div className="xl:hidden bg-[#0b0c10] border-b border-white/10">
+                    <div className="px-4 py-4 space-y-2">
+                        {navLinks.map((link) => (
+                            <MobileNavLink 
+                                key={link.label}
+                                href={link.href} 
+                                label={link.label}
+                                onClick={handleScroll}
+                            />
+                        ))}
                         <div className="pt-4 border-t border-white/10">
-                            <Link href="#" className="block w-full text-center text-sm font-medium text-blue-400 border border-blue-400/30 rounded py-2">
-                                Sign in
-                            </Link>
+                            <button 
+                                onClick={(e) => {
+                                    e.preventDefault();
+                                    const target = document.querySelector('#journey');
+                                    if (target) {
+                                        const navHeight = 64;
+                                        const targetPosition = target.getBoundingClientRect().top + window.pageYOffset - navHeight;
+                                        window.scrollTo({ top: targetPosition, behavior: 'smooth' });
+                                        setIsMobileMenuOpen(false);
+                                    }
+                                }}
+                                className="block w-full text-center bg-[#1a73e8] hover:bg-[#1967d2] text-white rounded-full py-2.5 font-medium"
+                            >
+                                Register Now
+                            </button>
                         </div>
                     </div>
                 </div>
@@ -82,26 +124,42 @@ export default function Navbar() {
     );
 }
 
-function NavLink({ href, label, hasDropdown = false }: { href: string, label: string, hasDropdown?: boolean }) {
+function NavLink({ 
+    href, 
+    label, 
+    onClick 
+}: { 
+    href: string; 
+    label: string; 
+    onClick: (e: React.MouseEvent<HTMLAnchorElement>, href: string) => void;
+}) {
     return (
-        <Link href={href} className="flex items-center gap-1 text-sm font-medium text-[#c4c7c5] hover:text-white transition-colors">
+        <a 
+            href={href} 
+            onClick={(e) => onClick(e, href)}
+            className="text-sm font-medium text-[#c4c7c5] hover:text-white transition-colors"
+        >
             {label}
-            {hasDropdown && (
-                <svg className="w-3 h-3 pt-0.5" viewBox="0 0 10 6" fill="currentColor">
-                    <path d="M5 6L0 0H10L5 6Z" />
-                </svg>
-            )}
-        </Link>
+        </a>
     );
 }
 
-function MobileNavLink({ href, label }: { href: string, label: string }) {
+function MobileNavLink({ 
+    href, 
+    label, 
+    onClick 
+}: { 
+    href: string; 
+    label: string; 
+    onClick: (e: React.MouseEvent<HTMLAnchorElement>, href: string) => void;
+}) {
     return (
-        <Link href={href} className="flex items-center justify-between text-base font-medium text-[#c4c7c5] py-2">
+        <a 
+            href={href} 
+            onClick={(e) => onClick(e, href)}
+            className="block text-base font-medium text-[#c4c7c5] hover:text-white py-2 transition-colors"
+        >
             {label}
-            <svg className="w-4 h-4 -rotate-90 text-gray-500" viewBox="0 0 10 6" fill="currentColor">
-                <path d="M5 6L0 0H10L5 6Z" />
-            </svg>
-        </Link>
-    )
+        </a>
+    );
 }

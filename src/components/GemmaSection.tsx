@@ -81,7 +81,7 @@ export default function GemmaSection() {
   }, [mounted]);
 
   return (
-    <section className="relative py-20 px-4 overflow-hidden">
+    <section id="collaboration" className="relative py-20 px-4 overflow-hidden">
       <div className="container mx-auto max-w-7xl">
         <div
           ref={cardRef}
