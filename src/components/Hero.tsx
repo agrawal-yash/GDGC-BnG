@@ -41,7 +41,7 @@ export default function Hero() {
                     {/* Announcement Badge */}
 
                     <h1 className="text-3xl sm:text-4xl md:text-6xl lg:text-7xl xl:text-[5.5rem] font-medium tracking-tight text-white leading-[1.1]" data-speed="1.1">
-                        Build & Grow <br/> AI Hackathon
+                        Build & Grow <br/> AI Hackathon 2.0
                     </h1>
 
                     <p className="text-base sm:text-lg md:text-xl lg:text-2xl text-[#9aa0a6] max-w-2xl mx-auto lg:mx-0 font-light leading-relaxed" data-speed="1.05">
@@ -49,7 +49,7 @@ export default function Hero() {
                     </p>
 
                     <div className="pt-2 sm:pt-4 flex flex-col sm:flex-row items-center justify-center lg:justify-start gap-3 sm:gap-4">
-                        <button className="w-full sm:w-auto h-11 sm:h-12 px-6 sm:px-8 rounded-full bg-[#1a73e8] hover:bg-[#1967d2] text-white font-medium text-base sm:text-lg transition-all shadow-[0_0_20px_rgba(26,115,232,0.3)] hover:shadow-[0_0_30px_rgba(26,115,232,0.5)]">
+                        <button className="w-full sm:w-auto h-14 sm:h-16 px-8 sm:px-12 rounded-full bg-[#1a73e8] hover:bg-[#1967d2] text-white font-medium text-lg sm:text-xl transition-all shadow-[0_0_28px_rgba(26,115,232,0.35)] hover:shadow-[0_0_40px_rgba(26,115,232,0.55)]">
                             Register Now
                         </button>
                     </div>

@@ -115,7 +115,7 @@ export default function GemmaSection() {
               <h2 className="text-2xl sm:text-3xl md:text-4xl lg:text-5xl font-bold text-white leading-tight">
                 GDG Cloud Mumbai
                 <br />
-                <span className="text-blue-400">✕</span>
+                <span className="text-blue-400">in collab</span>
                 <br />
                 GDG Cloud Pune
               </h2>

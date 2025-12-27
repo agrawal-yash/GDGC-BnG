@@ -2,6 +2,7 @@
 
 import { useState, useEffect } from "react"
 import { motion } from "framer-motion"
+import Image from "next/image"
 
 const codeSnippet = `import { GoogleGenerativeAI } from "@google/generative-ai";
 
@@ -174,36 +175,45 @@ export function TypewriterCode() {
   }, [currentIndex])
 
   return (
-    <motion.div
-      initial={{ opacity: 0, scale: 0.95 }}
-      animate={{ opacity: 1, scale: 1 }}
-      transition={{ duration: 0.5 }}
-      className="relative rounded-2xl overflow-hidden bg-[#2B2B2B] border border-gray-700/50 shadow-2xl"
-    >
-      {/* Header */}
-      <div className="flex items-center gap-2 px-4 py-3 border-b border-gray-700/50 bg-[#2B2B2B]">
-        <div className="flex gap-2">
-          <div className="w-3 h-3 rounded-full bg-[#FF5F56]" />
-          <div className="w-3 h-3 rounded-full bg-[#FFBD2E]" />
-          <div className="w-3 h-3 rounded-full bg-[#27C93F]" />
+    <div className="relative md:flex md:items-center md:gap-8">
+      <motion.div
+        initial={{ opacity: 0, scale: 0.95 }}
+        animate={{ opacity: 1, scale: 1 }}
+        transition={{ duration: 0.5 }}
+        className="relative rounded-2xl overflow-hidden bg-[#2B2B2B] border border-gray-700/50 shadow-2xl md:flex-1 z-30"
+      >
+        {/* Header */}
+        <div className="flex items-center gap-2 px-4 py-3 border-b border-gray-700/50 bg-[#2B2B2B]">
+          <div className="flex gap-2">
+            <div className="w-3 h-3 rounded-full bg-[#FF5F56]" />
+            <div className="w-3 h-3 rounded-full bg-[#FFBD2E]" />
+            <div className="w-3 h-3 rounded-full bg-[#27C93F]" />
+          </div>
+          <span className="text-xs text-gray-400 ml-2 font-mono">gemini-ai.ts</span>
         </div>
-        <span className="text-xs text-gray-400 ml-2 font-mono">gemini-ai.ts</span>
-      </div>
 
-      {/* Code Content */}
-      <div className="p-6 font-mono text-[13px] leading-[1.6] overflow-x-hidden bg-[#2B2B2B]">
-        <pre className="text-white">
-          <code>
-            {highlightCode(displayedCode)}
-          </code>
-        </pre>
-        <motion.span
-          animate={{ opacity: [1, 0] }}
-          transition={{ duration: 0.8, repeat: Number.POSITIVE_INFINITY }}
-          className="inline-block w-[10px] h-[18px] bg-cyan-400 ml-0.5"
-        />
+        {/* Code Content */}
+        <div className="p-6 font-mono text-[13px] leading-[1.6] overflow-x-hidden bg-[#2B2B2B]">
+          <pre className="text-white">
+            <code>
+              {highlightCode(displayedCode)}
+            </code>
+          </pre>
+          <motion.span
+            animate={{ opacity: [1, 0] }}
+            transition={{ duration: 0.8, repeat: Number.POSITIVE_INFINITY }}
+            className="inline-block w-[10px] h-[18px] bg-cyan-400 ml-0.5"
+          />
+        </div>
+      </motion.div>
+
+      {/* Decorative gateway image on the right for md+ screens — fully visible */}
+      <div className="hidden md:flex md:items-center md:justify-center md:flex-shrink-0">
+        <div className="relative w-56 sm:w-64 md:w-72 lg:w-80 rounded-3xl overflow-hidden shadow-2xl">
+          <Image src="/gateway.png" alt="Gateway" fill className="object-cover" />
+        </div>
       </div>
-    </motion.div>
+    </div>
   )
 }
 

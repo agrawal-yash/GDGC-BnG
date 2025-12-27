@@ -259,15 +259,13 @@ export default function TimelineSection() {
                                                         {/* Marathi (Primary) */}
                                                         <h4 className={`text-xl sm:text-2xl md:text-3xl font-bold mb-1 transition-colors duration-500 ${
                                                             isActive ? 'text-[#1a1a1a]' : 'text-[#2a2a2a]/80'
-                                                        }`}
-                                                        style={{ fontFamily: 'system-ui, -apple-system, sans-serif' }}>
+                                                        }`}>
                                                             {item.stationMarathi}
                                                         </h4>
                                                         {/* English (Secondary) */}
                                                         <h5 className={`text-xs sm:text-sm md:text-base font-semibold tracking-[0.2em] transition-colors duration-500 ${
                                                             isActive ? 'text-[#2a2a2a]' : 'text-[#3a3a3a]/70'
-                                                        }`}
-                                                        style={{ fontFamily: 'ui-monospace, monospace' }}>
+                                                        }`}>
                                                             {item.station}
                                                         </h5>
                                                     </div>
